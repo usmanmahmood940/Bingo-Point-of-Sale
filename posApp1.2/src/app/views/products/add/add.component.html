@@ -1,0 +1,79 @@
+<div class="login-bg  d-flex flex-row align-items-center">
+    <c-container style="width: 500px;">
+        <c-row class="justify-content-start">
+            <c-col xs="12">
+                <c-card-group class="login-form-group">
+                    <c-card class="p-4 login-form-card">
+                        <c-card-body>
+                            <form cForm #formdemo="ngForm">
+                                <h3 class="login-form-heading">Add Product</h3>
+
+                                <label cLabel class="login-form-label" for="formControlcategory">Category</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+             
+                                    <select cSelect  name="dropdown" class="inputDateColor"
+                                        style="width:fit-content;display: inline-block;" (change)="selectedOption($event)">
+                                        <option value="" disabled selected>Please Select Category...</option>
+                                        <option [value]="category.id" 
+                                            *ngFor="let category of categories">{{category.category}}
+                                        </option>
+                                    </select>
+                                </c-input-group>
+                                <label cLabel class="login-form-label" for="formControlprice">Code</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="product.code" autocomplete="off" cFormControl
+                                        placeholder="Product Code" type="number" required name="code"
+                                        id="formControlprice" />
+                                </c-input-group>
+                                <label cLabel class="login-form-label" for="formControlname">Name</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="product.name" autocomplete="off" cFormControl
+                                        placeholder="Product Name" type="text" required name="name"
+                                        id="formControlname" />
+                                </c-input-group>
+                                <label cLabel class="login-form-label" for="formControlprice">Price</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="product.price" autocomplete="off" cFormControl
+                                        placeholder="Product price" type="number" required name="price"
+                                        id="formControlprice" />
+                                </c-input-group>
+                                <label cLabel class="login-form-label" for="formControlunit">Unit</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="product.unit" autocomplete="off" cFormControl
+                                        placeholder="Product unit" type="text" required name="unit"
+                                        id="formControlunit" />
+                                </c-input-group>
+
+                                <c-row>
+                                    <c-col xs="12" class="btn-center">
+                                        <button cButton class="px-4 login-button" type="submit" (click)="onSubmit(formdemo)"
+                                           >
+                                            Add
+                                        </button>
+                                    </c-col>
+                                </c-row>
+
+                            </form>
+                        </c-card-body>
+                    </c-card>
+
+                </c-card-group>
+            </c-col>
+        </c-row>
+    </c-container>
+</div>

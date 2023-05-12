@@ -1,0 +1,132 @@
+<div class="login-bg d-flex flex-row align-items-center">
+  <c-container style="width: 500px">
+    <c-row class="justify-content-start">
+      <c-col xs="12">
+        <c-card-group class="login-form-group">
+          <c-card class="p-4 login-form-card">
+            <c-card-body>
+              <form cForm #formdemo="ngForm">
+                <h3 class="login-form-heading">Edit Product Inventory</h3>
+                <label cLabel class="login-form-label" for="formControlname"
+                  >Code</label
+                >
+                <c-input-group class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input
+                    [(ngModel)]="product.code"
+                    autocomplete="off"
+                    cFormControl
+                    placeholder="Product Code"
+                    type="text"
+                    required
+                    name="code"
+                    id="formControlname"
+                    disabled="true"
+                  />
+                </c-input-group>
+                <label cLabel class="login-form-label" for="formControlname"
+                  >Name</label
+                >
+                <c-input-group class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input
+                    [(ngModel)]="product.name"
+                    autocomplete="off"
+                    cFormControl
+                    placeholder="Product Name"
+                    type="text"
+                    required
+                    name="name"
+                    id="formControlname"
+                    disabled="true"
+                  />
+                </c-input-group>
+                <label
+                  cLabel
+                  class="login-form-label"
+                  for="formControlStockAvailable"
+                  >Stock Available</label
+                >
+                <c-input-group class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input
+                    [(ngModel)]="product.stockAvailable"
+                    autocomplete="off"
+                    cFormControl
+                    placeholder="Product StockAvailable"
+                    type="text"
+                    required
+                    name="stockAvailable"
+                    id="formControlStockAvailable"
+                  />
+                </c-input-group>
+                <label cLabel class="login-form-label" for="formControlStockIn"
+                  >Stock In</label
+                >
+                <c-input-group class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input
+                    [(ngModel)]="product.stockIn"
+                    autocomplete="off"
+                    cFormControl
+                    placeholder="Product stockIn"
+                    type="text"
+                    required
+                    name="stockIn"
+                    id="formControlStockIn"
+                  />
+                </c-input-group>
+                <label cLabel class="login-form-label" for="formControlStockOut"
+                  >Stock Out</label
+                >
+                <c-input-group class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input
+                    [(ngModel)]="product.stockOut"
+                    autocomplete="off"
+                    cFormControl
+                    placeholder="Product stockOut"
+                    type="text"
+                    required
+                    name="stockOut"
+                    id="formControlStockOut"
+                  />
+                </c-input-group>
+
+                <!-- <c-alert color="success" class="ss-mb-2" *ngIf="alert.showSuccuss">Password has been changed.</c-alert>
+
+                                <c-alert color="danger" *ngIf="alert.showError">Unable to change Password. Please verify Old Password.</c-alert>
+
+                                <c-alert color="danger" *ngIf="userData.show">Unable to change Password. Password & Confirm Password does not match.</c-alert> -->
+
+                <c-row>
+                  <c-col xs="12" class="btn-center">
+                    <button
+                      cButton
+                      class="px-4 login-button"
+                      type="submit"
+                      (click)="onSubmit(formdemo)"
+                     
+                    >
+                      Update
+                    </button>
+                  </c-col>
+                </c-row>
+              </form>
+            </c-card-body>
+          </c-card>
+        </c-card-group>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

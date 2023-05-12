@@ -1,0 +1,192 @@
+<div class="rootLoader" *ngIf="isLoading">
+    <c-row class="text-center loading">
+        <c-spinner style="color: #148A98;"></c-spinner>
+    </c-row>
+</div>
+<div class="container_1900" style="margin: 0;    min-width: calc(100vw - 313px);">
+
+    <c-row style="color: #148A98; font-weight: bold; margin-left: 0px;">Processed Applications (via Kiosks)</c-row>
+    <br>
+
+
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-auto mb-3">
+            <label cLabel class="login-form-label" for="formControlMedicalCenter">Medical Center: &nbsp; </label>
+            <select cSelect [(ngModel)]="selectOption" name="dropdown" class="inputDateColor" style="width:fit-content;display: inline-block;"
+                (change)="selectedOption()">
+                <option [value]="clinic.id" [selected]="userClinics[0].clinicName"
+                    *ngFor="let clinic of userClinics; let i = index">{{clinic.clinicName}}</option>
+            </select>
+        </div>
+
+        <div class="col-md-auto mb-3">
+            <label cLabel for="basic-url">Start Day:&nbsp; </label>
+            <input cFormControl type="date" class="inputDateColor" id="startDate" [value]="startDate"
+                (change)="onStartDateChange($event.target)" style="width:fit-content;display: inline-block;">
+        </div>
+
+        <div class="col-md-auto mb-3">
+            <label cLabel for="basic-url">End Day:&nbsp; </label>
+            <input cFormControl type="date" class="inputDateColor" id="endDate" [value]="endDate"
+                (change)="onEndDateChange($event.target)" style="width:fit-content;display: inline-block;">
+        </div>
+
+        <div class="col-md-auto" style="width: auto;">
+            <button cButton class="btn"
+                style="background-color:#148a98;color:white;border:1px solid #148A98" (click)="generateReport()">
+                <svg style="height:19px;width: 20px; padding-bottom:4px;">
+                    <use xlink:href="./assets/icons/file_icon.svg#Layer_1" style="fill: white;"></use>
+                </svg> Generate Report
+            </button>
+        </div>
+
+        <div class="col">
+            <button cButton class="btn"
+                style="background-color:#148a98;color:white;border:1px solid #148A98; float: right;"
+                (click)="exportCsv()">
+                <svg style="height:20px;width: 20px;padding-bottom:4px;">
+                    <use xlink:href="./assets/icons/Export New.svg#Layer_1" style="fill: white;"></use>
+                </svg>
+                Export </button>
+        </div>
+    </div>
+
+
+    <!-- <br/> -->
+    <c-row ngPreserveWhitespaces>
+        <c-col xs="12">
+            <span><label cLabel class="login-form-label" for="errorMsg" style="color:red"
+                    *ngIf="errorMsg">{{errorMsg}}</label></span>
+            <br>
+            <!-- <c-card class="mb-4" style="overflow: scroll;"> -->
+            <!-- <c-card-header>
+                <strong>Reports</strong><small></small>
+            </c-card-header> -->
+            <!-- <c-card-body> -->
+            <div style="overflow-x:auto;">
+                <table cTable style="background-color: white;margin-bottom: 0px;">
+                    <!-- <table cTable style="background-color: white;margin-bottom: 0px;" [striped]="true"> -->
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <colgroup span="6"></colgroup>
+                    <colgroup span="3"></colgroup>
+                    <colgroup span="3"></colgroup>
+                    <thead style="background-color: #148A98; color: white; font-size: 14px;">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th colspan="6" scope="colgroup" class="borderLR">Applicant</th>
+
+                            <th colspan="3" scope="colgroup" class="borderLR">Sponsor</th>
+                            <th colspan="3" scope="colgroup" class="borderL">Typing Center</th>
+                        </tr>
+                        <tr style="text-align:center">
+
+                            <th style="width:6px">Center</th>
+
+                            <th style="width:6px">Date</th>
+                            <th style="width:6px">Time</th>
+                            <th style="width:6px">Application #</th>
+
+                            <th style="width:6px">Name</th>
+                            <th style="width:65px">VISA Type</th>
+                            <th style="width:6px">Nationality</th>
+                            <th style="width:6px">Gender</th>
+
+                            <th style="width:6px">Mobile</th>
+
+                            <th style="width:6px">Email</th>
+
+                            <th style="width:95px">Name</th>
+
+                            <th style="width:100px">Mobile</th>
+
+                            <th style="width:105px">Address</th>
+
+                            <th style="width:6px"> Name</th>
+
+                            <th style="width:6px"> Mobile</th>
+
+                            <th style="width:6px"> Email</th>
+
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 12px;vertical-align: middle;text-align: center;"
+                        *ngIf="dataME.length > 0; else NoData">
+                        <tr *ngFor="let group of dataME">
+
+
+                            <td>{{group.clinicName}}</td>
+                            <td>{{group.entryDate | date:'dd/MM/yyyy'}}</td>
+                            <td>{{group.time}}</td>
+
+                            <td>{{group.applicationNumber}}</td>
+
+
+                            <td>{{group.applicantName}}</td>
+                            <td>{{group.visaCategory}}</td>
+                            <td>{{group.country}}</td>
+                            <td>{{group.gender}}</td>
+                            <td>{{group.mobile}}</td>
+                            <td>{{group.email}}</td>
+                            <td>{{group.sponsorNameEn}}</td>
+                            <td>{{group.sponsorMobileNumber}}</td>
+
+                            <td>{{group.sponsorAddress}}</td>
+                            <td>{{group.tcName}}</td>
+                            <td>{{group.tcMobile}}</td>
+
+                            <td>{{group.tcEmail}}</td>
+
+
+                        </tr>
+
+                    </tbody>
+                    <ng-template #NoData>
+                        <tbody style="font-size: 12px;">
+                            <tr>
+                                <td colspan="16" style="text-align: center; color:#148a98;">No processed applications.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </ng-template>
+                </table>
+            </div>
+            <!-- </c-card-body> -->
+            <!-- </c-card> -->
+        </c-col>
+    </c-row>
+    <br />
+<c-row>
+    <c-col class="col-lg-10 col">
+<c-pagination aria-label="Page navigation example">
+    <li id="pgePre" cPageItem   [disabled]="isPrev" [ngClass]="{'pageButton': !isPrev}">
+        <a cPageLink (click)="previous()" style="color:#148A98">Previous</a>
+    </li>
+    <li id="pgeNext"  cPageItem   [disabled]="isNext" [ngClass]="{'pageButton': !isNext}"     style="width: 85.66px;text-align: center;">
+      <a cPageLink (click)="next()" style="color:#148A98">Next</a>
+    </li>
+
+</c-pagination>
+</c-col>
+<c-col class="col-lg-2 col" style="display: flex; justify-content: end;padding-left: 0;">
+<p  style="float: left;" *ngIf="dataME.length > 0; else NoData1"><span style="font-weight:500">Showing Pages: </span>
+    <span>{{this.pageOf}} </span>
+    of {{MaxPage}}</p>
+
+    <ng-template #NoData1>
+        <p class="" style="float: left;"><span style="font-weight:500">Showing Pages: </span>
+            0 of 0</p>
+    </ng-template>
+</c-col>
+</c-row>
+<!-- Total Pages: <label ></label>  -->
+
+</div>

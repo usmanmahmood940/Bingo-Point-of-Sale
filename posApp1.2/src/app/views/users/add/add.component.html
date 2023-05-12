@@ -1,0 +1,114 @@
+<div class="login-bg  d-flex flex-row align-items-center">
+    <c-container style="width: 500px;">
+        <c-row class="justify-content-start">
+            <c-col xs="12">
+                <c-card-group class="login-form-group">
+                    <c-card class="p-4 login-form-card">
+                        <c-card-body>
+                            <form cForm #formdemo="ngForm">
+                                <h3 class="login-form-heading">Add User</h3>
+
+                             
+                                <label cLabel class="login-form-label" for="formControlname">Name </label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="user.name" autocomplete="off" cFormControl
+                                        placeholder="Name" type="text" required name="name"
+                                        id="formControlname"  />
+                                </c-input-group>
+                                <label cLabel class="login-form-label" for="formControlprice">Email</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="user.email" autocomplete="off" cFormControl
+                                        placeholder="Email" type="email" required name="discount"
+                                        id="formControlprice" />
+                                </c-input-group>
+                                <label cLabel class="login-form-label" for="formControlprice">Password</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="user.password" autocomplete="off" cFormControl
+                                        placeholder="Password" type="text" required name="discount"
+                                        id="formControlprice" />
+                                </c-input-group>
+                                <label cLabel class="login-form-label" for="formControlprice">Mobile Number</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="user.mobileNumber" autocomplete="off" cFormControl
+                                        placeholder="Mobile Number" type="text" minlength="11" required name="discount"
+                                        id="formControlprice"
+                                        (keypress)="onlyNumberKey($event)"
+                                        />
+                                </c-input-group>
+                                 <label cLabel class="login-form-label" for="formControlprice">CNIC</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="user.cnic" autocomplete="off" cFormControl
+                                        placeholder="CNIC" type="text" minlength="13" required name="discount"
+                                        id="formControlprice"
+                                        (keypress)=" onlyNumberKey($event)"
+                                        />
+                                </c-input-group>
+                                
+                                <label cLabel class="login-form-label" for="formControlprice">Role</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+             
+                                    <select cSelect  name="dropdown" class="inputDateColor"
+                                        style="width:fit-content;display: inline-block;" (change)="selectedOption($event)">
+                                        <option value="" disabled selected>Please Select Role...</option>
+                                        <option value="admin" >admin
+                                        </option>
+                                        <option value="cashier" >Cashier
+                                        </option>
+                                    </select>
+                                </c-input-group>
+                                <label cLabel class="login-form-label" for="formControlprice">Salary</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="user.salary" autocomplete="off" cFormControl
+                                        placeholder="Salary" type="number" required name="discount"
+                                        id="formControlprice" />
+                                </c-input-group>
+                                <label cLabel class="login-form-label" for="formControlprice">Address</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="user.address" autocomplete="off" cFormControl
+                                        placeholder="Address" type="text" required name="discount"
+                                        id="formControlprice" />
+                                </c-input-group>
+                               
+
+                                <c-row>
+                                    <c-col xs="12" class="btn-center">
+                                        <button cButton class="px-4 login-button" type="submit" (click)="onSubmit(formdemo)"
+                                           >
+                                            Add
+                                        </button>
+                                    </c-col>
+                                </c-row>
+
+                            </form>
+                        </c-card-body>
+                    </c-card>
+
+                </c-card-group>
+            </c-col>
+        </c-row>
+    </c-container>
+</div>

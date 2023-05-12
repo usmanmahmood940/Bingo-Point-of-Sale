@@ -1,0 +1,196 @@
+<div class="rootLoader" *ngIf="isLoading(); else loaded">
+  <c-row
+    class="text-center loading"
+    style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    "
+  >
+    <c-spinner style="color: #148a98"></c-spinner>
+  </c-row>
+</div>
+<ng-template #loaded>
+
+<div class="container_1900" style="margin: 0; min-width: calc(100vw - 313px)">
+  <!-- <div class="row">
+        
+
+        <div class="col-md-auto mb-3">
+            <label cLabel for="basic-url">Start Day:&nbsp; </label>
+            <input cFormControl type="date" class="inputDateColor" id="startDate" [value]="startDate"
+                (change)="onStartDateChange($event.target)" style="width:fit-content;display: inline-block;">
+        </div>
+
+        <div class="col-md-auto mb-3">
+            <label cLabel for="basic-url">End Day:&nbsp; </label>
+            <input cFormControl type="date" class="inputDateColor" id="endDate" [value]="endDate"
+                (change)="onEndDateChange($event.target)" style="width:fit-content;display: inline-block;">
+        </div>
+
+        <div class="col-md-auto" style="width: auto;">
+            <button cButton class="btn"
+                style="background-color:#148a98;color:white;border:1px solid #148A98" (click)="generateReport()">
+                <svg style="height:19px;width: 20px; padding-bottom:4px;">
+                    <use xlink:href="./assets/icons/file_icon.svg#Layer_1" style="fill: white;"></use>
+                </svg> Generate Report
+            </button>
+        </div>
+
+        <div class="col">
+            <button cButton class="btn"
+                style="background-color:#148a98;color:white;border:1px solid #148A98; float: right;"
+                (click)="exportCsv()">
+                <svg style="height:20px;width: 20px;padding-bottom:4px;">
+                    <use xlink:href="./assets/icons/Export New.svg#Layer_1" style="fill: white;"></use>
+                </svg>
+                Export </button>
+        </div>
+    </div> -->
+
+  <c-row ngPreserveWhitespaces>
+    <div class="col">
+      <button
+        cButton
+        class="btn"
+        style="
+          background-color: #148a98;
+          color: white;
+          border: 1px solid #148a98;
+          float: right;
+          margin-bottom: 1em;
+        "
+        [routerLink]="['/category/add']"
+      >
+        Add Category
+      </button>
+      <button
+        cButton
+        class="btn"
+        style="
+          background-color: #148a98;
+          color: white;
+          border: 1px solid #148a98;
+          float: right;
+          margin-bottom: 1em;
+          margin-right: 1rem;
+        "
+        (click)="loadexportdata()"
+      >
+        <i class="fa-solid fa-file-export"></i> Export
+      </button>
+    </div>
+    <c-col xs="12" class="custom-font" >
+      <c-card class="mb-4 box-shadow">
+        <!-- <span><label cLabel class="login-form-label" for="errorMsg" style="color:red"
+                    *ngIf="errorMsg">{{errorMsg}}</label></span> -->
+        <c-card-header class="custom-card">
+          <strong>Category</strong><small></small>
+          <input
+            type="text"
+            [(ngModel)]="filterBy"
+            placeholder="Search..."
+            (keyup)="filter()"
+            style="float: right"
+            class="search"
+          />
+        </c-card-header>
+        <c-card-body>
+          <div style="overflow-x: auto">
+            <table cTable hover id="myTable">
+              <thead>
+                <tr></tr>
+                <tr style="text-align: center">
+                  <th scope="col" style="cursor: pointer;" (click)="sort('createdAt')"># </th>
+                  <th scope="col"  style="cursor: pointer;" (click)="sort('name')" >Name </th>
+                  <th scope="col"  style="cursor: pointer;" (click)="sort('detail')" >Detail </th>
+                  <th scope="col"  style="cursor: pointer;" >Action</th>
+                </tr>
+              </thead>
+              <tbody
+                style="
+                  vertical-align: middle;
+                  text-align: center;
+                "
+                *ngIf="categoryList.length > 0; else NoData"
+              >
+                <tr
+                  *ngFor="
+                    let category of filteredCategory
+                     | sortBy: sortDirection:sortField  | paginate
+                        : {
+                            itemsPerPage: tableSize,
+                            currentPage: page,
+                            totalItems: count
+                          };
+                    let i = index
+                  "
+                >
+                  <td>{{ i + 1 + (tableSize * (page - 1)) }}</td>
+                  <td>{{ category.name }}</td>
+                  <td>{{ category.detail }}</td>
+
+                  <td>
+                    <!-- Call to action buttons -->
+                    <ul class="list-inline m-0">
+                      <li class="list-inline-item">
+                        <button
+                          class="btn btn-outline-primary btn-sm rounded"
+                          type="button"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Edit"
+                          [routerLink]="['/category/edit', category._id]"
+                        >
+                          <i class="fa-solid fa-pen-to-square" style="color:rgb(48, 85, 154)"></i>
+                        </button>
+                      </li>
+                      <!-- <li class="list-inline-item">
+                                        <button class="btn btn-success btn-sm rounded" type="button" data-toggle="tooltip" data-placement="top" title="View" (click)="viewCategory(category._id,)">View</button>
+                                    </li> -->
+
+                      <li class="list-inline-item" >
+                                        <button class="btn btn-outline-danger btn-sm rounded" type="button" data-toggle="tooltip" data-placement="top" title="Delete" (click)="categoryInUse(category._id)"><i class="fa-solid fa-trash" style="color:rgb(167, 38, 38)"></i>
+                                        
+</button>
+                                    </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+              <ng-template #NoData>
+                <tbody >
+                  <tr>
+                    <td colspan="16" style="text-align: center; color: #148a98">
+                      No Categories
+                    </td>
+                  </tr>
+                </tbody>
+              </ng-template>
+            </table>
+          </div>
+          <p style="float: left;margin-bottom: 0;" *ngIf="categoryList.length > 0">
+        <span style="font-weight: bold; color: #148a98; margin-right: 3px"
+          >Total Categories : {{ this.categoryList.length }}
+        </span>
+      </p>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+  <br />
+  <c-row>
+    <c-col class="col-lg-10 col">
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
+    </c-col>
+   
+  </c-row>
+  <!-- Total Pages: <label ></label>  -->
+</div>
+</ng-template>

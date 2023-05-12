@@ -1,0 +1,12 @@
+.invoice-format{
+    display: none;
+  }
+
+@media print {
+    :not(.invoice-format) {
+      display: none;
+    }
+     .invoice-format{
+       display: block;
+     }
+   }

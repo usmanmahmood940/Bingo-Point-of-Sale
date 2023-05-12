@@ -1,0 +1,57 @@
+<div class="login-bg  d-flex flex-row align-items-center">
+    <c-container style="width: 500px;">
+        <c-row class="justify-content-start">
+            <c-col xs="12">
+                <c-card-group class="login-form-group">
+                    <c-card class="p-4 login-form-card">
+                        <c-card-body>
+                            <form cForm #formdemo="ngForm">
+                                <h3 class="login-form-heading">Add Expense</h3>
+
+                             
+                                <label cLabel class="login-form-label" for="formControlname">Title </label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="expense.name" autocomplete="off" cFormControl
+                                        placeholder=" Expense Title" type="text" required name="stockBuy"
+                                        id="formControlname"  />
+                                </c-input-group>
+                                <label cLabel class="login-form-label" for="formControlprice">Detail</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="expense.detail" autocomplete="off" cFormControl
+                                        placeholder="Expense Detail" type="text" required name="detail"
+                                        id="formControlprice" />
+                                </c-input-group>
+                                <label cLabel class="login-form-label" for="formControlunit"> Amount</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="expense.amount" autocomplete="off" cFormControl
+                                        placeholder="Total Amount" type="number" required name="totalAmount"
+                                        id="formControlunit" />
+                                </c-input-group>
+
+                                <c-row>
+                                    <c-col xs="12" class="btn-center">
+                                        <button cButton class="px-4 login-button" type="submit" (click)="onSubmit(formdemo)"
+                                            >
+                                            Add
+                                        </button>
+                                    </c-col>
+                                </c-row>
+
+                            </form>
+                        </c-card-body>
+                    </c-card>
+
+                </c-card-group>
+            </c-col>
+        </c-row>
+    </c-container>
+</div>

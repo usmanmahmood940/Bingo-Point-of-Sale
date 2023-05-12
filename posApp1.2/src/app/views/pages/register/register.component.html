@@ -1,0 +1,74 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center background">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col lg="7" md="9" xl="6">
+        <c-card class="mx-4">
+          <c-card-body class="p-4">
+            <form cForm #formdemo="ngForm">
+              <h1>BingoPos</h1>
+              <p class="text-medium-emphasis">Create your account</p>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input [(ngModel)]="userData.name" autoComplete="name" cFormControl placeholder="Enter username" name="name" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>@</span>
+                <input [(ngModel)]="userData.email" autoComplete="email" cFormControl placeholder="Enter email" name="email" (blur)="checkEmail(userData)" type="email"/>
+              </c-input-group>
+               <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <svg cIcon name="cilPhone"></svg>
+                </span>
+                <input [(ngModel)]="userData.mobileNumber" autoComplete="brandname" cFormControl placeholder="Enter Phone Number" type="text" minlength="11" name="brandName" (keypress)=" onlyNumberKey($event)"/>
+              </c-input-group>
+              <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <svg cIcon name="cilTags"></svg>
+                </span>
+                <input [(ngModel)]="userData.brandName" autoComplete="brandname" cFormControl placeholder="Enter brand name" type="text" name="brandName"/>
+              </c-input-group>
+              <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <svg cIcon name="cilStorage"></svg>
+                </span>
+                <input [(ngModel)]="userData.dbName" autoComplete="dbname" cFormControl placeholder="Enter database name" type="text" name="dbName" (blur)="checkDbName(userData)"/>
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <input [(ngModel)]="userData.password" autoComplete="new-password" cFormControl placeholder="Enter Password" type="password" name="password " />
+              </c-input-group>
+              <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <input [(ngModel)]="userData.confirmPassword" autoComplete="new-password" cFormControl placeholder="Renter password" type="password" name="confirmPassword"/>
+              </c-input-group>
+              
+
+              <span  style="color:red" *ngIf="errorMsg">{{errorMsg}}<br> <br></span>
+
+              <div class="d-grid">
+                <button cButton class="px-4 login-button" style="text-transform:none" type="submit" (click)="signUp(userData,formdemo)" [disabled]="isDisable()">Create Account</button>
+              </div>
+              <br>
+              <div style="text-align: center;">
+              <label
+                cLabel
+                class="login-form-label hover"
+                for="formControlUsername"
+                [routerLink]="['/login']"
+                style="cursor: pointer"
+                >Login</label
+              >
+            </div>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

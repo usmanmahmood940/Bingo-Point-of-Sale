@@ -1,0 +1,35 @@
+<!--sidebar-->
+<c-sidebar #sidebar="cSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar" visible >
+    <c-sidebar-brand [brandFull]="{
+      src: 'assets/images/brand/bingo-pos.svg',
+      width: 200,
+      height: 46,
+      alt: 'SmartSalem Logo'
+    }" [brandNarrow]="{
+      src: 'assets/images/brand/bingo-pos.svg',
+      width: 46,
+      height: 46,
+      alt: 'SmartSalem Logo'
+    }" routerLink="./dashboard">
+    </c-sidebar-brand>
+    <perfect-scrollbar [config]="perfectScrollbarConfig" style="font-family: math; font-size: 1.2rem;">
+        <!--  [perfectScrollbar]="perfectScrollbarConfig"-->
+        <c-sidebar-nav [navItems]="navItems">
+        </c-sidebar-nav>
+    </perfect-scrollbar>
+    <c-sidebar-toggler *ngIf="!sidebar.narrow" toggle="unfoldable" cSidebarToggle="sidebar"></c-sidebar-toggler>
+</c-sidebar>
+
+<!--main-->
+<div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent" style="font-family: math;">
+    <!--app-header-->
+    <app-default-header class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar"></app-default-header>
+    <!--app-body-->
+    <div class="body flex-grow-1 px-3">
+        <c-container breakpoint="lg" class="h-auto noMargin" style="    min-width: -webkit-fill-available;">
+            <router-outlet></router-outlet>
+        </c-container>
+    </div>
+    <!--app footer-->
+    <app-default-footer></app-default-footer>
+</div>

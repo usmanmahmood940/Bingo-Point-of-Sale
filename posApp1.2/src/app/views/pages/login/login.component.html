@@ -1,0 +1,169 @@
+<div class="login-bg min-vh-100 d-flex flex-row align-items-center">
+  <!-- <c-container> -->
+  <c-row class="justify-content-start">
+    <c-col>
+      <c-card-group class="login-info-group">
+        <c-card class="p-4 login-info-card">
+          <c-card-body>
+            <!-- <div class="ss-flex-center login-info-label">
+              <span>Version: {{ version }}</span>
+            </div> -->
+            <div
+              class="ss-flex-center"
+              style="margin-top: 11em; margin-bottom: 8em"
+            >
+              <!-- <svg class="login-brand-logo">
+                                  <use xlink:href="./assets/icons/sprite.svg#smart-salem-logo-368"></use>
+                                </svg> -->
+              <img
+                class="login-brand-logo"
+                src="./assets/images/brand/bingo-pos-main.svg"
+              />
+            </div>
+            <!-- <div class="ss-flex-center">
+                                <svg class="login-dha-logo">
+                              <use xlink:href="./assets/icons/sprite.svg#dha-logo-368"></use>
+                            </svg>
+                            </div> -->
+            <div class="ss-flex-center login-info-label">
+              <span>All copyrights reserved | &copy; 2023 Bingo POS</span>
+            </div>
+          </c-card-body>
+        </c-card>
+      </c-card-group>
+    </c-col>
+    <c-col>
+      <c-card-group class="login-form-group">
+        <c-card class="p-4 login-form-card">
+          <c-card-body>
+            <form cForm #formdemo="ngForm">
+              <h1 class="login-form-heading"><b>Login Portal</b></h1>
+              <!-- <p class="text-medium-emphasis">Sign In to your account</p> -->
+              <!-- <label cLabel class="login-form-label" for="formControlMedicalCenter">Medical Center:</label>
+                                <c-input-group class="mb-4">
+                                <span cInputGroupText>
+                                        <svg cIcon name="cilBuilding"></svg>
+                                    </span>
+                                    <input autoComplete="username" cFormControl id="formControlMedicalCenter" placeholder="Please select your medical center" />
+
+                                    <select cSelect [(ngModel)]="selectOption" name="dropdown">
+                                         <option value="101">SmartSalem City Walk Center</option>
+                                        <option value="102">SmartSalem Index Center</option>
+                                        <option [value]="clinic.id" [selected]="userClinics[0].clinicName" *ngFor="let clinic of userClinics; let i = index" >{{clinic.clinicName}}</option>
+                                      </select>
+
+                                </c-input-group> -->
+
+              <br />
+              <label cLabel class="login-form-label" for="formControlUsername"
+                >Login Details:</label
+              >
+
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input
+                  [(ngModel)]="userData.username"
+                  name="username"
+                  autoComplete="username"
+                  id="formControlUsername"
+                  cFormControl
+                  placeholder="Please enter email"
+                  type="email"
+                />
+              </c-input-group>
+
+              <!-- <label cLabel class="login-form-label" for="formControlPassword">Password</label> -->
+              <c-input-group class="ss-mb-2">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <input
+                  [(ngModel)]="userData.password"
+                  name="password"
+                  autoComplete="current-password"
+                  cFormControl
+                  id="formControlPassword"
+                  placeholder="Please enter password"
+                  type="password"
+                />
+              </c-input-group>
+
+              <span style="color: red" *ngIf="errorMsg"
+                >{{ errorMsg }}<br />
+                <br
+              /></span>
+
+              <c-row>
+                <c-col xs="12">
+                  <button
+                    cButton
+                    class="px-4 login-button"
+                    type="submit"
+                    style="text-transform: none"
+                    (click)="authenticateUser(userData)"
+                    
+                  >
+                    Login
+                  </button>
+                </c-col>
+              </c-row>
+            </form>
+            <br /><br />
+            <div style="text-align: center;">
+              <label
+                cLabel
+                class="login-form-label hover"
+                for="formControlUsername"
+                [routerLink]="['/signup']"
+                style="cursor: pointer"
+                >Sign up for free</label
+              >
+            </div>
+            <div style="text-align: center;">
+              <label
+                cLabel
+                class="login-form-label hover"
+                for="formControlUsername"
+                [routerLink]="['/forgetPassword']"
+                style="cursor: pointer"
+                >Forget Password</label
+              >
+            </div>
+          </c-card-body>
+        </c-card>
+      </c-card-group>
+    </c-col>
+  </c-row>
+  <!-- </c-container> -->
+</div>
+<!-- <ng-container *ngIf="isLogInClicked && showErrorModal">
+<app-popup-modal [showErrorModal]="showErrorModal"></app-popup-modal>
+</ng-container> -->
+<!-- <c-modal #verticallyCenteredModal alignment="center" id="verticallyCenteredModal">
+    <c-modal-header>
+      <h5 cModalTitle>Modal title</h5>
+      <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        Please select a medical center
+    </c-modal-body>
+    <c-modal-footer>
+      <button [cModalToggle]="verticallyCenteredModal.id" cButton color="secondary">
+        Close
+      </button> -->
+<!-- <button cButton color="primary">Understood</button> -->
+<!-- </c-modal-footer>
+  </c-modal> -->
+
+<!-- <c-modal id="liveDemoModal" alignment="center" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
+    <c-modal-header>
+      <h5 cModalTitle>Modal title</h5>
+      <button (click)="toggleLiveDemo()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>Invalid username or password.</c-modal-body>
+    <c-modal-footer style="height: 48px;padding: 0px;padding-right: 7px;">
+      <button cButton color="primary" (click)="toggleLiveDemo()">Ok</button>
+    </c-modal-footer>
+  </c-modal> -->

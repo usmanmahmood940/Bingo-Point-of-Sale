@@ -1,0 +1,74 @@
+<c-row>
+  <c-col sm="6" xl="3" style="cursor: pointer;"  [routerLink]="['/sales']">
+    <c-widget-stat-a
+      class="mb-4"
+      color="primary"
+      title="Total Sales"
+    >
+      <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        Rs {{chartValues.totalSale}}
+        <!-- <span class="fs-6 fw-normal">
+          (-12.4% <svg cIcon name="cilArrowBottom"></svg>)
+        </span> -->
+      </ng-template>
+     
+      <ng-template cTemplateId="widgetChartTemplate">
+        <c-chart [data]="data[0]" [options]="options[0]" class="mt-3 mx-3" height="70" type="line"></c-chart>
+      </ng-template>
+    </c-widget-stat-a>
+  </c-col>
+  <c-col sm="6" xl="3" style="cursor: pointer;"  [routerLink]="['/products']">
+    <c-widget-stat-a
+      [title]="'Total Products'"
+      class="mb-4"
+      color="info"
+    >
+      <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <span>{{chartValues.totalProducts}}</span>
+        <!-- <span class="fs-6 fw-normal">
+          (40.9% <svg cIcon name="cilArrowTop"></svg>)
+        </span> -->
+      </ng-template>
+    
+      <ng-template cTemplateId="widgetChartTemplate">
+        <c-chart [data]="data[1]" [options]="options[1]" class="mt-3 mx-3" height="70" type="line"></c-chart>
+      </ng-template>
+    </c-widget-stat-a>
+  </c-col>
+  <c-col sm="6" xl="3" style="cursor: pointer;"  [routerLink]="['/category']">
+    <c-widget-stat-a
+      [title]="'Total Categories'"
+      class="mb-4"
+      color="warning"
+    >
+      <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <span>{{chartValues.totalCategories}}</span>
+        <!-- <span class="fs-6 fw-normal">
+          (84.7% <svg cIcon name="cilArrowTop"></svg>)
+        </span> -->
+      </ng-template>
+     
+      <ng-template cTemplateId="widgetChartTemplate">
+        <c-chart [data]="data[2]" [options]="options[2]" class="mt-3" height="70" type="line"></c-chart>
+      </ng-template>
+    </c-widget-stat-a>
+  </c-col>
+  <c-col sm="6" xl="3" style="cursor: pointer;"  [routerLink]="['/expenses']">
+    <c-widget-stat-a
+      [title]="'Total Expenses'"
+      class="mb-4"
+      color="danger"
+    >
+      <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <span>Rs {{chartValues.totalExpenses}}</span>
+        <!-- <span class="fs-6 fw-normal">
+          (-23.6% <svg cIcon name="cilArrowBottom"></svg>)
+        </span> -->
+      </ng-template>
+      
+      <ng-template cTemplateId="widgetChartTemplate">
+        <c-chart [data]="data[3]" [options]="options[3]" class="mt-3 mx-3" height="70" type="bar"></c-chart>
+      </ng-template>
+    </c-widget-stat-a>
+  </c-col>
+</c-row>

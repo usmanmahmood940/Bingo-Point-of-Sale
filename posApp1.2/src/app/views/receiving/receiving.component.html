@@ -1,0 +1,243 @@
+<div class="rootLoader" *ngIf="isLoading(); else loaded">
+  <c-row
+    class="text-center loading"
+    style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    "
+  >
+    <c-spinner style="color: #148a98"></c-spinner>
+  </c-row>
+</div>
+<ng-template #loaded>
+  <div class="container_1900" style="margin: 0; min-width: calc(100vw - 313px)">
+    <c-row ngPreserveWhitespaces>
+      <div class="row">
+            <div class="col-12 col-md-6 d-flex align-items-center">
+             <input
+                type="date"
+                [(ngModel)]="startDate"
+                placeholder="Start Range"
+                 class="search  mb-3"
+                    style="height: 2.3rem; margin-right: 1rem;"
+              />
+              <input
+                type="date"
+                [(ngModel)]="endDate"
+                placeholder="End Range"
+                class="search  mb-3"
+                    style="height: 2.3rem;margin-right: 1rem;"
+              />
+              <button cButton class="btn  mb-3"
+                style="background-color:#148a98;color:white;border:1px solid #148A98; "
+                (click)="getReceivingByFilter(startDate,endDate)">
+                Filter</button>
+           </div>
+         <div class="col-12 col-md-6 d-flex align-items-center justify-content-between justify-content-md-end">
+          <button cButton class="btn mr-1 mb-3"
+                    style="background-color:#148a98;color:white;border:1px solid #148A98;margin-right: 1rem"
+                    (click)="loadexportdata()">
+                    <i class="fa-solid fa-file-export"></i> Export
+                </button>
+        <button cButton class="btn mr-1 mb-3"
+                    style="background-color:#148a98;color:white;border:1px solid #148A98;"
+          (click)="addReceiving()"
+        >
+          Add Receiving
+        </button>
+       
+        </div>
+      </div>
+      <c-col xs="12" class="custom-font">
+        <c-card class="mb-4 box-shadow">
+          <!-- <span><label cLabel class="login-form-label" for="errorMsg" style="color:red"
+                    *ngIf="errorMsg">{{errorMsg}}</label></span> -->
+          <c-card-header class="custom-card">
+            <strong>Receivings </strong><small></small>
+            <input
+              type="text"
+              [(ngModel)]="filterBy"
+              placeholder="Search..."
+              (keyup)="filter()"
+              style="float: right"
+              class="search"
+            />
+          </c-card-header>
+          <c-card-body>
+            <div style="overflow-x: auto">
+              <table cTable hover id="myTable">
+                <thead>
+                  <tr></tr>
+                  <tr style="text-align: center">
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="sort('createdAt')"
+                    >
+                      #
+                    </th>
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="this.apiService.sortTable(1)"
+                    >
+                      Date
+                    </th>
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="this.apiService.sortTable(2)"
+                    >
+                      Time
+                    </th>
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="this.apiService.sortTable(3)"
+                    >
+                      Product Name
+                    </th>
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="sort('stockBuy')"
+                    >
+                      Stock Buy
+                    </th>
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="sort('discount')"
+                    >
+                      Discount
+                    </th>
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="sort('totalAmount')"
+                    >
+                      Total Amount
+                    </th>
+
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody
+                  style="
+                    vertical-align: middle;
+                    text-align: center;
+                  "
+                  *ngIf="receivings.length > 0; else NoData"
+                >
+                  <tr
+                    *ngFor="
+                      let receiving of filteredReceiving
+                        | sortBy : sortDirection : sortField
+                        | paginate
+                          : {
+                              itemsPerPage: tableSize,
+                              currentPage: page,
+                              totalItems: count
+                            };
+                      let i = index
+                    "
+                  >
+                    <td>{{ i + 1  + (tableSize * (page - 1)) }}</td>
+                    <td>
+                      {{ this.apiService.getDateFormat(receiving.createdAt) }}
+                    </td>
+                    <td>{{ this.apiService.getTime(receiving.createdAt) }}</td>
+                    <td>{{ this.getProductName(receiving._productId) }}</td>
+                    <td>{{ receiving.stockBuy }}</td>
+                    <td>{{ receiving.discount }}</td>
+                    <td>{{ receiving.totalAmount }}</td>
+
+                    <td>
+                      <!-- Call to action buttons -->
+                      <ul class="list-inline m-0">
+                        <li class="list-inline-item">
+                          <button
+                            class="btn btn-outline-primary btn-sm rounded"
+                            type="button"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Edit"
+                            [routerLink]="['/receiving/edit', receiving._id]"
+                          >
+                            <i class="fa-solid fa-pen-to-square" style="color:rgb(48, 85, 154)"></i>
+                          </button>
+                        </li>
+                        <li class="list-inline-item">
+                          <button
+                            class="btn btn-outline-success btn-sm rounded"
+                            type="button"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="View"
+                            (click)="
+                              viewReceiving(
+                                receiving._id,
+                                getProductName(receiving._productId),
+                                apiService
+                              )
+                            "
+                          >
+                           <i class="fa-solid fa-eye" style="color:#2bb057;"></i>
+                          </button>
+                        </li>
+                        <li class="list-inline-item">
+                          <button
+                            class="btn btn-outline-danger btn-sm rounded"
+                            type="button"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Delete"
+                            (click)="confirmDialog(receiving._id)"
+                          >
+                              <i class="fa-solid fa-trash" style="color:rgb(167, 38, 38)"></i>
+                          </button>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+                <ng-template #NoData>
+                  <tbody>
+                    <tr>
+                      <td
+                        colspan="16"
+                        style="text-align: center; color: #148a98"
+                      >
+                        No Receinvgs
+                      </td>
+                    </tr>
+                  </tbody>
+                </ng-template>
+              </table>
+            </div>
+            <p style="float: left; margin-bottom: 0;" *ngIf="receivings.length > 0">
+          <span style="font-weight: bold; color: #148a98; margin-right: 3px"
+            >Total Receivings : {{ this.receivings.length }}
+          </span>
+        </p>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+    <br />
+    <c-row>
+      <c-col class="col-lg-10 col">
+        <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        >
+        </pagination-controls>
+      </c-col>
+      
+    </c-row>
+    <!-- Total Pages: <label ></label>  -->
+  </div>
+</ng-template>

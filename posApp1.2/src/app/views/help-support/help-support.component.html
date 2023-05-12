@@ -1,0 +1,84 @@
+<div class="login-bg d-flex flex-row align-items-center">
+  <c-container style="width: 500px">
+    <c-row class="justify-content-start">
+      <c-col xs="12">
+        <c-card-group class="login-form-group">
+          <c-card class="p-4 login-form-card">
+            <c-card-body>
+              <form cForm #formdemo="ngForm">
+                <h3 class="login-form-heading">Tech Support</h3>
+
+                <label cLabel class="login-form-label" for="formControlname"
+                  >Email
+                </label>
+                <c-input-group class="mb-3">
+                  <span cInputGroupText> @ </span>
+                  <input
+                    [(ngModel)]="help.email"
+                    autocomplete="off"
+                    cFormControl
+                    placeholder="Enter Email"
+                    type="text"
+                    required
+                    name="email"
+                    id="formControlname"
+                  />
+                </c-input-group>
+
+                <label cLabel class="login-form-label" for="formControlprice"
+                  >Detail</label
+                >
+                <c-input-group class="mb-3">
+                  <textarea
+                    [(ngModel)]="help.message"
+                    autocomplete="off"
+                    cFormControl
+                    placeholder="Feedback/Question/Feature Request"
+                    type="text"
+                    required
+                    name="message"
+                    id="formControlprice"
+                  ></textarea>
+                </c-input-group>
+
+                <c-row>
+                  <c-col xs="12" style="align-items: center"  class="btn-center">
+                    <button
+                      cButton
+                      class="px-4 login-button"
+                      type="submit"
+                      (click)="onSubmit(formdemo)"
+                    
+                    >
+                      Submit
+                    </button>
+                  </c-col>
+                </c-row>
+
+                <br />
+                <br />
+                <br />
+                <div
+                  style="
+                    align-items: center;
+                    width: 100%;
+                    display: flex;
+
+                    justify-content: center;
+                  "
+                >
+                  <a
+                    href="https://drive.google.com/drive/folders/1PD_bxRBWeWU6gPm1LkH-51vmwtVCA9qQ?usp=sharing"
+                    style="text-decoration: none; color: black"
+                    class="demo-hover"
+                    >Click on this Link for demo</a
+                  >
+                </div>
+              </form>
+            </c-card-body>
+          </c-card>
+        </c-card-group>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

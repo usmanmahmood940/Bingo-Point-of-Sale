@@ -1,0 +1,139 @@
+<div class="smallInvoice-mainDiv">
+  <div id="smallinvoice">
+    <div mat-dialog-content>
+      <div class="invoice-content">
+        <div class="company-details">
+          <!-- <p style="font-weight: bold">{{ invoiceDetails.user.name }}</p>
+          <p>{{ invoiceDetails.user.email }}</p>
+          <p>{{ invoiceDetails.user.created_at | date: 'd/M/y hh:mm' }}</p> -->
+        </div>
+        <div class="invoice-header">
+          <h1 style="font-weight: bold">BingoPos</h1>
+          <h5 style="font-weight: bold">
+            Sale Id : {{ invoiceDetails.saleId }}
+          </h5>
+
+          <!--          <p style="margin-bottom: 5px !important;">{{ data.invoiceNumber }}</p>-->
+        </div>
+        <div class="item-box">
+        <table style="font-size: 13px; width: 110%; position: relative; left: -5%;">
+          <thead>
+            <tr></tr>
+            <tr style="text-align: center">
+              <th>#</th>
+              <th style="margin-left: 2px;">Name</th>
+              <th style="margin-left: 2px;">Unit</th>
+              <th style="margin-left: 2px;">Price</th>
+              <th style="margin-left: 2px;">Quantity</th>
+              <th style="margin-left: 2px;">Amount</th>
+            </tr>
+          </thead>
+          <tbody
+            style=" font-size: 13px;"
+            *ngFor="let item of invoiceDetails.productList; let i = index"
+          >
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td style="margin-left: 2px;">{{ item.product.name }}</td>
+              <td style="margin-left: 2px;">{{ item.product.unit }}</td>
+              <td style="margin-left: 2px;">{{ item.product.price }}</td>
+              <td style="margin-left: 2px;">{{ item.quantity }}</td>
+              <td style="margin-left: 2px;">{{ item.product.price * item.quantity }}</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+        <!-- <div class="item-box">
+          <div
+            class="invoice-item" *ngFor="let item of invoiceDetails.productList let i = index"
+            >
+            
+            <div>
+              <div>
+                <p>{{ item.quantity }} x {{ item.product.price }}</p>
+              </div>
+              <p style="margin-top: -5px !important">{{ item.product.name }}</p>
+            </div>
+            <div>
+              <p>Rs:{{ item.total }}</p>
+            </div>
+            <div>
+              <p>Rs:{{ item.total }}</p>
+            </div>
+
+          </div>
+        </div> -->
+        <div class="total-box">
+          <div class="description-column">
+            <p
+              style="
+                font-weight: bold;
+                margin-top: 20px !important;
+                margin-bottom: 10px !important;
+                margin-left: 5px !important;
+                transform: scale(1, 1.5);
+              "
+            >
+              Total
+            </p>
+            <p>Cash Given</p>
+            <p>Change</p>
+          </div>
+          <div class="numbers-column">
+            <p
+              style="
+                font-weight: bold;
+                margin-top: 15px !important;
+                margin-bottom: 10px !important;
+                margin-right: 5px !important;
+                transform: scale(1, 1.5);
+              "
+            >
+              Rs {{ invoiceDetails.totalAmount | number : "1.1-2" }}
+            </p>
+            <p>Rs {{ invoiceDetails.givenAmount }}</p>
+            <p>Rs {{ invoiceDetails.changeAmount }}</p>
+            <p></p>
+          </div>
+        </div>
+        <!--        <div *ngIf="data.invoicePayments.length > 0">-->
+        <!--          <div class="payment" *ngFor="let invoicePayment of data.invoicePayments">-->
+
+        <!--            <div class="description-column">-->
+        <!--              <p style="margin-left: 5px !important; margin-top: 5px!important; text-align: left; margin-bottom: 10px!important; margin-top: 0px !important;">-->
+        <!--                {{invoicePayment.paymentMethod.name}}</p>-->
+
+        <!--            </div>-->
+        <!--            <div class="numbers-column">-->
+        <!--              <p style="margin-right: 5px !important;-->
+        <!--                         margin-top: 5px!important; text-align: right; font-size: 15px !important;margin-top:0px !important;">-->
+        <!--                {{invoicePayment.amount}}</p>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+
+        <div class="qrCode">
+          <p style="font-size: 22px !important">Thank You</p>
+        </div>
+        <div>
+          <div>
+            <div class="barcode" style="width: 200px; display: block">
+              <ngx-barcode
+                [bc-height]="40"
+                [bc-width]="2"
+                [bc-value]="barcode"
+                [bc-display-value]="false"
+                style="height: 60px; width: 200px"
+              >
+              </ngx-barcode>
+            </div>
+          </div>
+          <div>
+            <span style="font-size: 11px !important">BingoPOS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--{{invoiceDetails | json}}-->
+</div>

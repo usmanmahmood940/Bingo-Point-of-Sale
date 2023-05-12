@@ -1,0 +1,117 @@
+<c-col xs="12" class="custom-font" >
+<c-card class="mb-4 box-shadow" >
+     <c-card-header class="custom-card">
+            <strong>Edid Sale </strong><small></small>
+            <input
+              type="text"
+               [(ngModel)]="filterBy"
+              placeholder="Search..."
+              (keyup)="filter()"
+              style="float: right"
+              class="search"
+            />
+          </c-card-header>
+          <c-card-body>
+            <div style="overflow-x: auto">
+    <table cTable hover>
+        <thead>
+            <tr style="text-align:center">
+                <th>Product Code</th>
+                <th>Product Name</th>
+                <th>Unit</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody style="vertical-align: middle;text-align: center;"
+            *ngIf="invoiceProducts.length > 0; else NoData">
+            <tr *ngFor="let element of filteredInvoiceProducts; let i = index">
+                <td>{{ getProductCode(element._productId)}}</td>
+                <td>{{ getProductName(element._productId)}}</td>
+                <td>{{ getProductUnit(element._productId)}}</td>
+                <td>{{ getProductPrice(element._productId)}}</td>
+
+                <td style="min-width: 80px">
+                    <div class="d-flex align-items-center" style="justify-content: space-evenly">
+                        <!-- <button class="count-btn remove" (click)="decreaseQuantity(element)">
+                            -
+                        </button> -->
+                        <button
+                            class="btn btn-outline-danger btn-sm rounded"
+                            type="button"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Decrease"
+                            style="border-radius: 2rem !important;"
+                             (click)="decreaseQuantity(element)"
+                          >
+                          <i class="fa-solid fa-minus" style="color:rgb(167, 38, 38)"></i>
+                          </button>
+                       
+                        &nbsp;&nbsp;{{element.quantity}}&nbsp;&nbsp;
+                        <!-- <button class="count-btn add"
+                            [disabled]="getProductAvailable(element._productId) <= element.quantity"
+                            (click)="increaseQuantity(element)">
+                            +
+                        </button> -->
+                         <button
+                            class="btn btn-outline-success btn-sm rounded"
+                            type="button"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Increase"
+                            [disabled]="getProductAvailable(element._productId) <= element.quantity"
+                            (click)="increaseQuantity(element)"
+                            style=" border-radius: 2rem !important;;"
+                          >
+                          <i class="fa-solid fa-plus" style="color:#2bb057;"></i>
+                          </button>
+                    </div>
+                </td>
+                <td>
+                    Rs {{ element.quantity * getProductPrice(element._productId) }}
+                </td>
+
+            </tr>
+           
+        </tbody>
+        <ng-template #NoData>
+            <tbody >
+                <tr>
+                    <td colspan="4" style="text-align: center; color:#148a98;">No Products
+                    </td>
+                </tr>
+            </tbody>
+        </ng-template>
+        <!-- <tfoot *ngIf="invoiceProducts.length > 0">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Total: Rs {{ allTotal() }}</td>
+                
+            </tr>
+        </tfoot> -->
+    </table>
+     </div>
+</c-card-body>
+           
+    
+
+</c-card>
+</c-col>
+<div style="text-align-last:center;">
+    
+        <button (click)="payInvoice()" mat-flat-button color="warn">
+            <mat-icon class="mr-2">point_of_sale</mat-icon>
+            <span> Update</span>
+        </button>
+<!--         
+          <span style=" color: black; margin-right: 3rem; float: right;"
+            >Total Rs: {{ allTotal() }}
+          </span> -->
+        
+    
+</div>

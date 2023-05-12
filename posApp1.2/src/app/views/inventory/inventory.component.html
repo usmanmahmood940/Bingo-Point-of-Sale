@@ -1,0 +1,239 @@
+<div class="rootLoader" *ngIf="isLoading(); else loaded">
+  <c-row
+    class="text-center loading"
+    style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    "
+  >
+    <c-spinner style="color: #148a98"></c-spinner>
+  </c-row>
+</div>
+<ng-template #loaded>
+  <div class="container_1900" style="margin: 0; min-width: calc(100vw - 313px)">
+    <!-- <div class="row">
+
+        <div class="col-md-auto mb-3">
+            <label cLabel for="basic-url">Start Day:&nbsp; </label>
+            <input cFormControl type="date" class="inputDateColor" id="startDate" [value]="startDate"
+                (change)="onStartDateChange($event.target)" style="width:fit-content;display: inline-block;">
+        </div>
+
+        <div class="col-md-auto mb-3">
+            <label cLabel for="basic-url">End Day:&nbsp; </label>
+            <input cFormControl type="date" class="inputDateColor" id="endDate" [value]="endDate"
+                (change)="onEndDateChange($event.target)" style="width:fit-content;display: inline-block;">
+        </div>
+
+        <div class="col-md-auto" style="width: auto;">
+            <button cButton class="btn"
+                style="background-color:#148a98;color:white;border:1px solid #148A98" (click)="generateReport()">
+                <svg style="height:19px;width: 20px; padding-bottom:4px;">
+                    <use xlink:href="./assets/icons/file_icon.svg#Layer_1" style="fill: white;"></use>
+                </svg> Generate Report
+            </button>
+        </div>
+
+        <div class="col">
+            <button cButton class="btn"
+                style="background-color:#148a98;color:white;border:1px solid #148A98; float: right;"
+                (click)="exportCsv()">
+                <svg style="height:20px;width: 20px;padding-bottom:4px;">
+                    <use xlink:href="./assets/icons/Export New.svg#Layer_1" style="fill: white;"></use>
+                </svg>
+                Export </button>
+        </div>
+    </div> -->
+
+    <c-row ngPreserveWhitespaces>
+      <div class="col">
+        <button
+          cButton
+          class="btn"
+          style="
+            background-color: #148a98;
+            color: white;
+            border: 1px solid #148a98;
+            float: right;
+            margin-bottom: 1em;
+            margin-right: 1em;
+          "
+          (click)="loadexportdata()"
+        >
+          <i class="fa-solid fa-file-export"></i> Export
+        </button>
+      </div>
+      <c-col xs="12" class="custom-font">
+        <c-card class="mb-4 box-shadow">
+          <!-- <span><label cLabel class="login-form-label" for="errorMsg" style="color:red"
+                    *ngIf="errorMsg">{{errorMsg}}</label></span> -->
+          <c-card-header class="custom-card">
+            <strong>Inventory</strong><small></small>
+            <div style="float: right">
+              <select class="selctionBox" (change)="selectedOption($event)">
+                <option value="all">All</option>
+                <option value="code">Code</option>
+              </select>
+              <input
+                type="text"
+                [(ngModel)]="filterBy"
+                placeholder="Search..."
+                (keyup)="filter()"
+                class="search"
+              />
+            </div>
+          </c-card-header>
+          <c-card-body>
+            <div style="overflow-x: auto">
+              <table cTable hover id="myTable">
+                <thead>
+                  <tr></tr>
+                  <tr style="text-align: center">
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="this.apiService.sortTable(0)"
+                    >
+                      #
+                    </th>
+                    <th
+                      style="cursor: pointer"
+                      scope="col"
+                      (click)="sort('code')"
+                    >
+                      Code
+                    </th>
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="sort('name')"
+                    >
+                      Name
+                    </th>
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="sort('availableQuantity')"
+                    >
+                      Stock Available
+                    </th>
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="sort('stockIn')"
+                    >
+                      Stock In
+                    </th>
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="sort('stockOut')"
+                    >
+                      Stock Out
+                    </th>
+                    <th
+                      scope="col"
+                      style="cursor: pointer"
+                      (click)="sort('createdAt')"
+                    >
+                      Date
+                    </th>
+
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody
+                  style="vertical-align: middle; text-align: center"
+                  *ngIf="products.length > 0; else NoData"
+                >
+                  <tr
+                    *ngFor="
+                      let product of filteredProducts
+                        | sortBy : sortDirection : sortField
+                        | paginate
+                          : {
+                              itemsPerPage: tableSize,
+                              currentPage: page,
+                              totalItems: count
+                            };
+                      let i = index
+                    "
+                  >
+                    <td>{{ i + 1 + tableSize * (page - 1) }}</td>
+                    <td>{{ product.code }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.availableQuantity }}</td>
+                    <td>{{ product.stockIn }}</td>
+                    <td>{{ product.stockOut }}</td>
+                    <td>{{ apiService.getDateFormat(product.createdAt) }}</td>
+
+                    <td>
+                      <!-- Call to action buttons -->
+                      <ul class="list-inline m-0">
+                        <li class="list-inline-item">
+                          <button
+                            class="btn btn-outline-primary btn-sm rounded"
+                            type="button"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Edit"
+                            [routerLink]="['/inventory/edit', product._id]"
+                          >
+                            <i
+                              class="fa-solid fa-pen-to-square"
+                              style="color: rgb(48, 85, 154)"
+                            ></i>
+                          </button>
+                        </li>
+                        <!-- <li class="list-inline-item">
+                                        <button class="btn btn-success btn-sm rounded" type="button" data-toggle="tooltip" data-placement="top" title="View" (click)="viewProduct(product._id)">View</button>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-danger btn-sm rounded" type="button" data-toggle="tooltip" data-placement="top" title="Delete" (click)="deleteProduct(product._id)">Delete</button>
+                                    </li> -->
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+                <ng-template #NoData>
+                  <tbody>
+                    <tr>
+                      <td
+                        colspan="16"
+                        style="text-align: center; color: #148a98"
+                      >
+                        No Products
+                      </td>
+                    </tr>
+                  </tbody>
+                </ng-template>
+              </table>
+            </div>
+            <p
+              style="float: left; margin-bottom: 0"
+              *ngIf="products.length > 0"
+            >
+              <span style="font-weight: bold; color: #148a98; margin-right: 3px"
+                >Total Products:{{ this.products.length }}
+              </span>
+            </p>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+    <br />
+    <c-row>
+      <c-col class="col-lg-10 col">
+        <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        >
+        </pagination-controls>
+      </c-col>
+    </c-row>
+    <!-- Total Pages: <label ></label>  -->
+  </div>
+</ng-template>

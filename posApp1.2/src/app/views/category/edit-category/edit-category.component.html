@@ -1,0 +1,56 @@
+<div class="login-bg  d-flex flex-row align-items-center">
+    <c-container style="width: 500px;">
+        <c-row class="justify-content-start">
+            <c-col xs="12">
+                <c-card-group class="login-form-group">
+                    <c-card class="p-4 login-form-card">
+                        <c-card-body>
+                            <form cForm #formdemo="ngForm">
+                                <h3 class="login-form-heading">Edit Category</h3>
+
+                                
+                                <label cLabel class="login-form-label" for="formControlname">Name</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="category.name" autocomplete="off" cFormControl
+                                        placeholder="Category Name" type="text" required name="name"
+                                        id="formControlname" />
+                                </c-input-group>
+                                <label cLabel class="login-form-label" for="formControldetail">Detail</label>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                                        <svg cIcon name="cilLockLocked"></svg>
+                                    </span>
+                                    <input [(ngModel)]="category.detail" autocomplete="off" cFormControl
+                                        placeholder="Category Detail" type="text" required name="detail"
+                                        id="formControldetail" />
+                                </c-input-group>
+                                
+
+
+                                <!-- <c-alert color="success" class="ss-mb-2" *ngIf="alert.showSuccuss">Password has been changed.</c-alert>
+
+                                <c-alert color="danger" *ngIf="alert.showError">Unable to change Password. Please verify Old Password.</c-alert>
+
+                                <c-alert color="danger" *ngIf="userData.show">Unable to change Password. Password & Confirm Password does not match.</c-alert> -->
+
+                                <c-row>
+                                    <c-col xs="12" class="btn-center">
+                                        <button cButton class="px-4 login-button" type="submit" (click)="onSubmit(formdemo)"
+                                            >
+                                            Update
+                                        </button>
+                                    </c-col>
+                                </c-row>
+
+                            </form>
+                        </c-card-body>
+                    </c-card>
+
+                </c-card-group>
+            </c-col>
+        </c-row>
+    </c-container>
+</div>

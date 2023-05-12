@@ -1,0 +1,135 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="flex-center">
+          <!-- <mat-spinner></mat-spinner> -->
+        </div>
+      </div>
+  
+      <!-- <div class="col-12 my-2" *ngIf="vm.invoiceDetails">
+        <div class="invoice-details">
+          <span>User: {{ vm.invoiceDetails.user.name }}</span>
+          <span>Paid: {{ vm.invoiceDetails.is_paid === 1 ? 'Yes' : 'No' }}</span>
+          <span
+            >Time:
+            {{ vm.invoiceDetails.created_at | date: 'medium':'+0000' }}</span
+          >
+          <span>Total: {{ vm.invoiceDetails.total }} Lekë</span>
+        </div>
+      </div> -->
+  
+      <div class="col-12 col-md-2">
+        <h2>Categories</h2>
+        <div
+          class="categories-container"
+          *ngIf="categoryList; else loading">
+          <button
+            class="category-item"
+            *ngFor="let category of categoryList"
+            mat-button
+            type="button"
+            (click)="setActiveCategory(category._id)"
+            [class.active]="category.isActive">
+            
+            <!-- <mat-icon class="mr-2"><i class="fa-solid fa-mug-hot"></i></mat-icon> -->
+            <span>{{ category.name }}</span>
+          </button>
+        </div>
+        <ng-template #loading>
+          <div class="flex-center">
+            
+          </div>
+        </ng-template>
+      </div>
+      <div class="col-12 col-md-4">
+        <h2>Products</h2>
+        <mat-form-field appearance="outline" style="width: 250px;">
+          <mat-label>Search products</mat-label>
+          <input  type="text"[(ngModel)]="filterBy" (keyup)="filter()" matInput/>
+        </mat-form-field>
+  
+        <div class="products-container container-fluid">
+          <div
+            class="row justify-content-start align-items-center"
+            >
+            <div
+              class="col-12 col-md-6 mb-2 px-0"
+              *ngFor="let product of filteredProducts">
+              <div
+                class="product-item"
+                (click)="addToInvoice(product)">
+                <b>{{ product.name }}</b>
+                <div class="details">
+                  <span>
+                    {{ product.availableQuantity }}
+                  </span>
+                  <span>{{ product.price }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <h2>Invoice</h2>
+  
+
+        <app-create-invoice-table
+          [invoiceProducts]="invoiceProducts">
+        </app-create-invoice-table>
+
+        <!-- <app-create-invoice-table
+          [invoiceProducts]="vm.invoiceProducts"
+          (removed)="removeItem($event)"
+          (increase)="increaseItemQuantity($event)"
+          (decrease)="decreaseItemQuantity($event)">
+        </app-create-invoice-table> -->
+  
+        <br />
+        <div
+          class="d-flex justify-content-around"
+          >
+          <!-- <button
+            [disabled]="invoiceProducts.length == 0"
+            (click)="createInvoice()"
+            mat-flat-button
+            color="primary">
+            <mat-icon class="mr-2">shopping_cart</mat-icon>
+            <span>Create invoice</span>
+          </button> -->
+          <!-- <button
+            *ngIf="vm.invoiceDetails !== null && vm.invoiceDetails?.is_paid === 0"
+            (click)="updateInvoice()"
+            mat-flat-button
+            color="primary">
+            <mat-icon class="mr-2">edit</mat-icon>
+            <span>Update invoice</span>
+          </button> -->
+          <button style=" margin-bottom: 2rem;"
+            
+            (click)="payInvoice()"
+            mat-flat-button
+            color="warn">
+            <mat-icon class="mr-2">point_of_sale</mat-icon>
+            <span>Pay now</span>
+          </button>
+          <!-- <button
+           
+            (click)="printInvoice()"
+            mat-flat-button
+            color="primary">
+            <mat-icon class="mr-2">print</mat-icon>
+            <span>Print invoice</span>
+          </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="invoice-format" >
+    <div class="invoice-format" *ngIf="invoiceDetails">
+      <app-invoice-format
+        class="invoice-format"
+        [invoiceDetails]="invoiceDetails"></app-invoice-format>
+    </div>
+  </div>

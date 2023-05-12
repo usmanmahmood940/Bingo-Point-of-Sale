@@ -1,0 +1,97 @@
+<c-card class="mb-4" style="overflow-x: auto">
+  <table cTable hover>
+    <thead>
+      <tr style="text-align: center">
+        <th>Product Name</th>
+        <th>Unit</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody
+      style="vertical-align: middle; text-align: center"
+      *ngIf="invoiceProducts.length > 0; else NoData"
+    >
+      <tr *ngFor="let element of invoiceProducts; let i = index">
+        <td>{{ element.product.name }}</td>
+        <td>{{ element.product.unit }}</td>
+        <td>{{ element.product.price }}</td>
+
+        <td style="min-width: 80px">
+          <div
+            class="d-flex align-items-center"
+            style="justify-content: space-evenly"
+          >
+            <!-- <button class="count-btn remove" (click)="decreaseQuantity(element)">
+                            -
+                        </button> -->
+            <button
+              class="btn btn-outline-danger btn-sm"
+              type="button"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Decrease"
+              style="border-radius: 2rem !important"
+              (click)="decreaseQuantity(element)"
+            >
+              <i
+                class="fa-solid fa-minus"
+                style="color: rgb(167, 38, 38)"
+              ></i></button
+            >&nbsp;&nbsp;{{ element.quantity }}&nbsp;&nbsp;
+            <!-- <button class="count-btn add" [disabled]="element.product.availableQuantity <= element.quantity"
+                            (click)="increaseQuantity(element)">
+                            +
+                        </button> -->
+            <button
+              class="btn btn-outline-success btn-sm rounded"
+              type="button"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Increase"
+              [disabled]="element.product.availableQuantity <= element.quantity"
+              (click)="increaseQuantity(element)"
+              style="border-radius: 2rem !important "
+            >
+              <i class="fa fa-solid fa-plus" style="color: #2bb057"></i>
+            </button>
+          </div>
+        </td>
+        <td>Rs {{ element.quantity * element.product.price }}</td>
+        <td>
+          <!-- <button (click)="removeFromInvoice(element)">
+                        <i class="fa-sharp fa-solid fa-trash"></i>
+                    </button> -->
+          <button
+            class="btn btn-outline-danger btn-sm"
+            type="button"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Decrease"
+            (click)="removeFromInvoice(element)"
+          >
+            <i class="fa fa-solid fa-trash" style="color: rgb(167, 38, 38)"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <ng-template #NoData>
+      <tbody>
+        <tr>
+          <td colspan="5" style="text-align: center; color: #148a98">
+            No Products
+          </td>
+        </tr>
+      </tbody>
+    </ng-template>
+    <tfoot *ngIf="invoiceProducts.length > 0">
+      <tr>
+        <td colspan="3"></td>
+        <td>Total: Rs {{ allTotal() }}</td>
+        <td colspan="1"></td>
+      </tr>
+    </tfoot>
+  </table>
+</c-card>
